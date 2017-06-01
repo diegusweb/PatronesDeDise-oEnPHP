@@ -52,6 +52,16 @@ class SingletonDBConnection
     }
 }
 
-//example use
+//ejemplo de usp correcto
 $test = SingletonDBConnection::getInstance();
 $tes->connectDB($data);
+
+//si intentamos insranciar nuevamente nos dara un error
+$test2 = SingletonDBConnection::getInstance();
+$test2->connectDB($data);
+
+//si intentamos clonar la instancia $test, el metodo __clone que pusimos evitar que podamos
+//crear una nueva instancia
+
+$clonTest1 = clone $test;
+$clonTest1->connectDB($data);
