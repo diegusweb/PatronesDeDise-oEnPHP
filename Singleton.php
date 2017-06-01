@@ -5,6 +5,8 @@
  * User: Diego Rueda
  * Date: 6/1/2017
  * Time: 3:56 PM
+ * Instancia unica esta diseñado para restringir la creacion de
+ * objetos de una clase, en si solo permite la instancia de una clase
  */
 class SingletonDBConnection
 {
