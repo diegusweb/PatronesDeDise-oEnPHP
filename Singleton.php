@@ -11,7 +11,7 @@
 class SingletonDBConnection
 {
     //contenedor de la instancia del singleton
-    static private $instances;
+    static private $instances = null;
 
     //un constructor privado ecita la creacion d eun nuevo objeto
     private function __construct()
@@ -22,9 +22,12 @@ class SingletonDBConnection
     //metodo del singleton que debe ser static
     public static function getInstance()
     {
-        if(!isset(self::$instance)){
+        $d =0;
+        if(self::$instances == null){
+            $d++;
             $myClass = __CLASS__;
             self::$instances = new $myClass;
+           echo $d."<br>";
         }
 
         return self::$instances;
@@ -32,12 +35,12 @@ class SingletonDBConnection
 
     public function query($data)
     {
-        return null;
+        return "qury";
     }
 
     public function connectDB($data)
     {
-        return null;
+        return "connectDB";
     }
 
     public function __wakeup(){
@@ -50,20 +53,22 @@ class SingletonDBConnection
 
     //evita que el objeto se pueda clonar
     public function __clone(){
-        throw new Exception('Class  '.__CLASS__ . 'cannot be cloned');
+       throw new Exception('Class  '.__CLASS__ . 'cannot be cloned');
     }
 }
 
+
+$data = null;
 //ejemplo de usp correcto
 $test = SingletonDBConnection::getInstance();
-$tes->connectDB($data);
+echo $test->connectDB($data);
 
 //si intentamos insranciar nuevamente nos dara un error
-$test2 = SingletonDBConnection::getInstance();
-$test2->connectDB($data);
+//$test2 = SingletonDBConnection::getInstance();
+//echo $test2->connectDB($data);
 
 //si intentamos clonar la instancia $test, el metodo __clone que pusimos evitar que podamos
 //crear una nueva instancia
 
-$clonTest1 = clone $test;
-$clonTest1->connectDB($data);
+//$clonTest1 = clone $test;
+//$clonTest1->connectDB($data);
