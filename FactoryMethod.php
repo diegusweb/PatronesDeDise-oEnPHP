@@ -10,6 +10,12 @@
  * https://www.uno-de-piera.com/el-patron-factory-method-en-php/
  */
 
+/**
+ * Lo primero que debemos crear es una clase abstracta Customer
+ * que contenga un método abstracto, ese método será el que haga efectivo el patrón factory method
+ * */
+
+
 abstract class FactoryMethod
 {
     protected abstract function buildOrder($price);
