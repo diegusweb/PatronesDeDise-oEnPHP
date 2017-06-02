@@ -20,23 +20,24 @@ abstract class FactoryMethod
     }
 }
 
+
 class CustomerCash extends FactoryMethod
 {
     protected function buildOrder($price)
     {
-        // TODO: Implement buildOrder() method.
         return new OrderCash($price);
     }
 }
+
 
 class CustomerSubscription extends FactoryMethod
 {
     protected function buildOrder($price)
     {
-        // TODO: Implement buildOrder() method.
-        return new CustomerCash($price);
+        return new OrderSubcription($price);
     }
 }
+
 
 class OrderCash
 {
@@ -49,7 +50,7 @@ class OrderCash
 
     public function paid()
     {
-        return "Pago al conrado a efectuado correctam,ente";
+        return "Pago al contado efectuado correctamente: {$this->price}";
     }
 }
 
@@ -64,14 +65,14 @@ class OrderSubcription
 
     public function paid()
     {
-        return "pago en suscription";
+        return "Pago a plazos efectuado correctamente: {$this->price}";
     }
 }
 
 //pago al contado
 $customeCash = new CustomerCash();
 echo $customeCash->newOrder(400);
-
+echo "<br>";
 //nueva suscripcion
 $customeSubscription = new CustomerSubscription();
-$customeSubscription->newOrder(60);
+echo $customeSubscription->newOrder(60);
