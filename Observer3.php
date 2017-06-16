@@ -9,58 +9,71 @@
 
 
 //crearemos una clase abstracta que heredan las clases observables
-abstract class Observervable
+abstract class Observables
 {
-    protected $observers;
+    protected $obsevers;
 
-    public function __construct()
+    function __construct()
     {
-        $this->observers = array();
+        $this->obsevers = array();
     }
 
-    public function registrarObserver($observer)
+    public function registrarObserver($oberver)
     {
-        if(in_array($observer, $this->observers)){
-            $this->observers[] = $observer;
+        if(in_array($oberver, $this->obsevers)){
+           $this->obsevers[] = $oberver;
         }
     }
 
-    public function deregistrarOberver($oberver)
+    public function deregistrarObserver($observer)
     {
-        if (in_array($oberver, $this->observers)){
-            $key = array_search($oberver, $this->observers);
-            unset($this->observers[$key]);
+        if(in_array($observer, $this->obsevers)){
+            $key = array_search($observer, $this->obsevers);
+            unset($this->obsevers[$key]);
         }
     }
 
     abstract public function notificarObservers();
-
 }
 
-//y una interfaz que implementaran los observadores
 interface Observer
 {
-    public function notificar($sender, $param);
+    public function notificar($sender, $params);
 }
 
-class MiObservable extends Observervable
+class MiObservable extends Observables
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function notificarObservers()
-    {
-        foreach ($this->observers as $observer){
-            $observer->notificar($this, $this->param);
-        }
-    }
-
-    public function Event($texto)
+    public function Evento($texto)
     {
         $this->param = $texto;
         $this->notificarObservers();
+    }
+
+    public function notificarObservers()
+    {
+        foreach ($this->obsevers as $obsever) {
+            $obsever->notificar($this, $this->param);
+        }
+    }
+}
+
+
+class SalvarLog implements Observer
+{
+
+    public function onChanged($sender, $args)
+    {
+        // TODO: Implement onChanged() method.
+    }
+
+    public function notificar($sebder, $params)
+    {
+        echo " Guardando en BD $params a las ".date('h:i:s', time())."<br />";
     }
 }
 
@@ -72,25 +85,20 @@ class Log implements Observer
         // TODO: Implement onChanged() method.
     }
 
-    public function notificar($sender, $param)
+    public function notificar($sebder, $params)
     {
-        echo get_class($sender)." envio {$param} a las ".date("h:i:d")."";
-    }
-}
-
-class SalvarLog implements Obverser
-{
-    public function notificar($sender, $param)
-    {
-        echo "Guardando en BD $param enviado por ".get_class($sender)."... <br /><br />";
+        echo get_class($sebder)." envio $params a las ".date('h:i:s', time())."<br />";
     }
 }
 
 
-$obj = new MiObservable();
+$bbj = new MiObservable();
 $obj->registrarObserver(new Log());
-$obj->registrarObserver(new SalvarLog());
+$obj->registrarObercer(new SalvarLog());
 
-$obj->Event("text1");
-sleep(2);
-$obj->Event("text2");
+$bbj->Evento("test 1");
+sleep(1);
+$bbj->Evento("test 2");
+
+$bbj->deregistrarObserver(new SalvarLog());
+$obj->Evemto("test 3");

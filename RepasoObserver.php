@@ -14,7 +14,7 @@
  */
 abstract class Observable
 {
-    protected $observers,
+    protected $observers;
 
     function __construct()
     {
@@ -84,7 +84,7 @@ class NumeroUsuarios implements Observer
     {
         $this->numUsuarios = $this->numUsuarios+$params;
 
-        echo get_class($sebder)." envio".$this->numUsuarios." a las "date('h:i:s', time())."<br />";
+        echo get_class($sebder)." envio".$this->numUsuarios." a las ".date('h:i:s', time())."<br />";
     }
 }
 
