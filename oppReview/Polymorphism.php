@@ -8,7 +8,7 @@
 
 namespace Polymorphismo;
 
-
+//we create an interface class
 interface Shape{
     public function clacArea();
 
@@ -46,6 +46,7 @@ class Rectangle implements Shape
     }
 }
 
+//test
 
 $circ = new Circle(5);
 $rect = new Rectangle(6,8);
