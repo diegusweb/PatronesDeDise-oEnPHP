@@ -8,6 +8,7 @@
 
 namespace Traits;
 
+//como multiple herencias
 
 trait  Price{
     public function changePriceByDollar($price, $change)

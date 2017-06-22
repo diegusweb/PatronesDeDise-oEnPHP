@@ -46,7 +46,7 @@ class Rectangle implements Shape
     }
 }
 
-//test
+//test ejemplo de uso
 
 $circ = new Circle(5);
 $rect = new Rectangle(6,8);
